@@ -1,4 +1,4 @@
-FROM python:3.12 as base
+FROM python:3.12-slim as base
 
 ENV PYTHONFAULTHANDLER=1 \
     PYTHONHASHSEED=random \
@@ -26,7 +26,9 @@ COPY ./src/webapp .
 FROM base as final
 
 COPY --from=builder /venv /venv
-COPY ./scripts/docker-entrypoint.sh .
+COPY ./scripts/docker-entrypoint.sh /scripts/docker-entrypoint.sh
 COPY ./src/webapp .
 
-CMD ["./docker-entrypoint.sh"]
+RUN chmod a+x /scripts/docker-entrypoint.sh
+
+CMD ["/scripts/docker-entrypoint.sh"]

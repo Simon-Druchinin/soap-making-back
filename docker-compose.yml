@@ -7,6 +7,25 @@ services:
       dockerfile: ci-cd/webapp.Dockerfile
     env_file:
       - env/.env_webapp.dev
+    volumes:
+      - ./src/webapp:/app
     ports:
       - "8000:8000"
+    depends_on:
+      - pgdb
+
+  pgdb:
+    image: postgres:16.2-bookworm
+    container_name: pgdb
+    environment:
+      POSTGRES_DB: "soap_making_db"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    volumes:
+      - pgdbdata:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+
+volumes:
+  pgdbdata: null
   
