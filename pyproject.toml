@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "soap-making-backend"
+version = "0.1.0"
+description = "Backend for soap-making site orders"
+authors = ["Simon Druchinin"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+[tool.poetry.group.webapp.dependencies]
+django = "^5.0.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

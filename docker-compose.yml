@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+  webapp:
+    build:
+      context: .
+      dockerfile: ci-cd/webapp.Dockerfile
+    env_file:
+      - env/.env_webapp.dev
+    ports:
+      - "8000:8000"
+  
