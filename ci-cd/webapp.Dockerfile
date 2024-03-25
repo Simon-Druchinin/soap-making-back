@@ -4,7 +4,6 @@ ENV PYTHONFAULTHANDLER=1 \
     PYTHONHASHSEED=random \
     PYTHONUNBUFFERED=1
 
-RUN apt-get update && apt-get install -y gcc libffi-dev g++
 WORKDIR /app
 
 FROM base as builder
@@ -28,6 +27,8 @@ FROM base as final
 COPY --from=builder /venv /venv
 COPY ./scripts/docker-entrypoint.sh /scripts/docker-entrypoint.sh
 COPY ./src/webapp .
+
+ENV PATH="/venv/bin:$PATH"
 
 RUN chmod a+x /scripts/docker-entrypoint.sh
 
